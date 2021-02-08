@@ -26,33 +26,53 @@ body{
 
 .moviesAll{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    -webkit-flex-flow: row wrap;
+    align-items: stretch;
+    -webkit-align-items: stretch;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    margin-top: 10px;
 }
 
-.movies{
+.movie{
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    align-items: stretch;
     margin-bottom: 1rem;
-    width: 25%;
+    margin: 1rem;
+    width: calc(33% - 4rem);
+
 }
 
-.movies .card-header{
+.content{
+    padding: 1rem;
+}
+
+
+.movie .card-header{
     margin-left: auto;
     margin-right: auto;
 
     font-size: 45px;
-    margin-bottom: 1rem;
     text-align: center;
+    
+    text-align: center;
+    text-align: center;
+
 }
 
-.movies .card-main{
+.movie .card-main{
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    padding-top: 1rem;
     text-align: left;
 }
 
-.movies .card-main p{
+.movie .card-main p{
     font-weight: bold;
 }
 
-.movies .card-main p span{
+.movie .card-main p span{
     font-weight: normal;
 }
 
