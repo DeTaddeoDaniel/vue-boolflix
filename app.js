@@ -24,6 +24,10 @@ new Vue({
                     console.log(dataAPI.data)
                     this.movies = dataAPI.data.results
                     console.log(this.movies[0])
+
+                    this.movies.forEach((movie,index) => {
+                        movie.poster_path = 'https://image.tmdb.org/t/p/original'+movie.poster_path;
+                    });
                     
                 })
 

@@ -24,7 +24,7 @@ body{
     margin-bottom: 2rem;
 }
 
-.emojiAll{
+.moviesAll{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -45,5 +45,17 @@ body{
 }
 
 .movies .card-main{
-    text-align: center;
+    text-align: left;
+}
+
+.movies .card-main p{
+    font-weight: bold;
+}
+
+.movies .card-main p span{
+    font-weight: normal;
+}
+
+img{
+    width: 100%;
 }
