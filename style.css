@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: black;
+}
+
+.wrapper{
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.container{
+    max-width: 900px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.header{
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.emojiAll{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.movies{
+    margin-bottom: 1rem;
+    width: 25%;
+}
+
+.movies .card-header{
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 45px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.movies .card-main{
+    text-align: center;
+}

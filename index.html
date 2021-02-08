@@ -18,16 +18,21 @@
 
 </head>
 <body class="bg-black">
-    <div class="wrap">
+    <div class="wrapper">
         <div class="container mx-auto" id="app">
 
             <div class="header text-gray-400 text-center">
                 <h1 class="text-6xl">Boolflix</h1>
             </div>
             
+            <div class="header text-gray-400 text-center">
+                <input type="text" v-model="searchInput">
+                <button @click="ottieniMovies">Search</button>
+            </div>
+
             <div class="main">
 
-                main
+                
 
             </div>
         </div>
