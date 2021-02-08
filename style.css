@@ -57,5 +57,13 @@ body{
 }
 
 img{
-    width: 100%;
+    /* width: 100%; */
+    max-height: 250px;
+}
+
+.posterNull{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    height: 250px;
 }

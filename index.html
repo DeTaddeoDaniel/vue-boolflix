@@ -36,7 +36,8 @@
                     
                     <div class="movies" v-for="movie in this.movies">
                         <div class="card-header">
-                            <img :src="movie.poster_path" alt="poster">
+                            <img v-if="movie.poster_path != null" :src="movie.poster_path" alt="poster">
+                            <p v-if="movie.poster_path == null" class="posterNull">Poster non disponibile</p>
                         </div>
                         <div class="card-main">
                             <p>Titolo: <span>{{movie.title}}</span></p>
