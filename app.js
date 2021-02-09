@@ -26,16 +26,18 @@ new Vue({
                 .get('https://api.themoviedb.org/3/search/movie', {params:{
                     api_key: '7d986f5d7f72343a109e093583f2df92',
                     query: this.searchInput,
+                    language: 'it'
                 }})
                 
                 .then(dataAPI =>{
                     this.movies = dataAPI.data.results
+                    console.log(this.movies)
                     this.ottieniPosterMedia()
                     
                 })
 
                 .catch(error =>{
-                    console.log('Error in the API call');
+                    console.log('Error in the API media');
                     console.log(error);
                 })
 
