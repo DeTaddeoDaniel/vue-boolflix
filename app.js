@@ -12,6 +12,7 @@ new Vue({
 
         // array film from API
         movies: [],
+        media:[],
 
         // array country
         countries: []
@@ -38,6 +39,7 @@ new Vue({
                     this.ottieniPosterMedia()
                     this.votoInStelle()
                     this.typeMedia('movie')
+                    this.addMediaArray()
                     
                 })
 
@@ -100,8 +102,11 @@ new Vue({
             this.movies = this.movies.map( disco =>{
                 return { ...disco, type: type};
             })
-        }
+        },
 
+        addMediaArray: function(){
+            this.media = this.movies
+        }
 
     },
 
