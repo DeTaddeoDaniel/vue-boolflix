@@ -37,26 +37,25 @@
                         <button @click="getDataAPI">Search</button>
                     </input>
                 </div>
+
             </div>
             
-
             <div class="main">
 
-                <div class="moviesAll">
+                <div class="mediaAll">
                     
                     <div class="movie" v-for="(movie, index) in media">
-
-                        <p>{{index}}</p>
                         
                         <!-- movie -->
                         <div class="content" v-if="movie.type == 'movie'">
 
                             <span class="typeMedia">{{movie.type}}</span>
 
-                            <div class="">
+                            <div class="boxPoster">
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
-                                <img v-else src="imgNonDisponibile.png">
+                                <img v-else class="imgNotFound" src="imgNonDisponibile.png">
                             </div>
+
                             <div class="card-main">
                                 <p>Titolo: <span>{{movie.title}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
@@ -66,7 +65,7 @@
                                     <span v-else>Non disponibile</span>
                                 </p>
                                 <p>Voto stella: <span>{{movie.votoStelle.votoNumericoStelle}}</span></p>
-                                <p>
+                                <p class="stelle">
                                         <span v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
                                         --><span v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
                                         --><span v-for="index in movie.votoStelle.mancanti"> <i class="far fa-star"></i> </span>

@@ -51,56 +51,55 @@ body{
     font-weight: bold;
 }
 
-.moviesAll{
+.mediaAll{
     display: flex;
-    display: -webkit-flex;
-    flex-flow: row wrap;
-    -webkit-flex-flow: row wrap;
+    flex-wrap: wrap;
     align-items: stretch;
-    -webkit-align-items: stretch;
-    justify-content: flex-start;
-    -webkit-justify-content: flex-start;
-    margin-top: 10px;
+    min-height: 250px;
 }
 
 .movie{
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    align-items: stretch;
-    margin-bottom: 1rem;
-    margin: 1rem;
-    width: calc(33% - 4rem);
-
+    width: calc(25% - 20px);
+    position: relative;
+    margin: 10px;
+    /* border: 1px solid white; */
 }
 
-.content{
-    padding: 1rem;
+.boxPoster{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
 }
 
-
-.movie .card-header{
-
-    height: 250px;
-
-    margin-left: auto;
-    margin-right: auto;
-    
-    text-align: center;
-    text-align: center;
-
+.card-main{
+    display: none;
+    font-size: 1rem;
 }
 
-.movie .card-main{
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
-    padding-top: 1rem;
-    text-align: left;
-}
-
-.movie .card-main p{
+.card-main p{
     font-weight: bold;
 }
 
-.movie .card-main p span{
+.card-main p span{
     font-weight: normal;
+}
+
+.boxPoster:hover + .card-main{
+    position: absolute;
+    display: block;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: steelblue;
+    min-height: 100%;
+    max-height: 250px;
+}
+
+.imgNotFound{
+    padding: 25px;
 }
 
 img{
@@ -114,16 +113,9 @@ img{
     text-align: center;
 }
 
-.d-flex{
-    display: flex;
-}
-
-.stelle li{
+.stelle{
     letter-spacing: 2px;
-}
-
-.movie .content{
-    position: relative;
+    color: yellow;
 }
 
 .typeMedia{
@@ -135,4 +127,5 @@ img{
     text-transform: uppercase;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
+    font-weight: bold;
 }
