@@ -62,6 +62,7 @@ body{
     width: calc(25% - 20px);
     position: relative;
     margin: 10px;
+    background-color: #232323;
     /* border: 1px solid white; */
 }
 
@@ -96,6 +97,7 @@ body{
     background-color: steelblue;
     min-height: 100%;
     max-height: 250px;
+    width: 100%;
 }
 
 .imgNotFound{
