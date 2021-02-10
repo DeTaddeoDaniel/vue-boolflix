@@ -69,7 +69,7 @@ new Vue({
                     console.log(this.serieTv)
                     this.ottieniPosterMedia()
                     this.votoInStelle()
-                    this.typeMedia('movie')
+                    this.typeMedia('serieTv')
                     this.addMediaArray()
                     
                 })
