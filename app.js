@@ -15,11 +15,11 @@ new Vue({
     },
 
     beforeMount() {
-        // ottieni tutte le bandiere
-        this.ottieniCountry()
+
     },
 
     methods: {
+
         ottieniMovies: function(){
 
             axios
@@ -33,6 +33,7 @@ new Vue({
                     this.movies = dataAPI.data.results
                     console.log(this.movies)
                     this.ottieniPosterMedia()
+                    this.votoInStelle()
                     
                 })
 
@@ -52,19 +53,34 @@ new Vue({
                     });
         },
 
-        ottieniCountry: function(){
-            axios
-                .get('https://restcountries.eu/rest/v2/all?fields=name;flag;alpha2Code')
-                .then(apiState =>{
-                    console.log(apiState.data)
-                    this.countries = apiState.data
-                })
+        votoInStelle: function(){
+            
+            // add to visibility item variable
+             this.movies = this.movies.map( movie =>{
+                let votoStelle = {
+                    voto: 0,
+                    stellaMeta: false
+                }
 
-                .catch(error => {
-                    console.log('Error in the API country');
-                    console.log(error);
-                })
+                votoStelle.voto = Math.floor(movie.vote_average / 2);
+                // console.log('voto stelle piene: ' + votoStelle.voto);
+
+                let decimali = parseInt((movie.vote_average / 2 - votoStelle.voto) * 100);
+                console.log('voto stella meta: ' + decimali);
+
+                if(decimali >= 50 && votoStelle.voto < 10){
+                    votoStelle.stellaMeta = true;
+                } else {
+                    votoStelle.stellaMeta = false;
+                }
+
+                console.log(votoStelle)
+
+                return { ...movie, votoStelle};
+            })
         }
+
+
     },
 
 })

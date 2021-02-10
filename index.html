@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dischi musicali API boolean</title>
     
-    <!-- add tailwind -->
+    <!-- add style -->
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
+
+    <!-- add awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
@@ -38,7 +41,7 @@
                         <div class="content">
 
                             <div class="card-header">
-                                <img v-if="movie.poster_path != null" :src="movie.poster_path" alt="poster">
+                                <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
                                 <img v-else src="imgNonDisponibile.png">
                             </div>
                             <div class="card-main">
@@ -46,6 +49,11 @@
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
                                 <p>Lingua originale: <span>{{movie.original_language}}</span></p>
                                 <p>Voto: <span>{{movie.vote_average}}</span></p>
+                                <p>
+                                    Voto: 
+                                    <span v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span>
+                                    <span v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span>
+                                </p>
                             </div>
 
                         </div>
