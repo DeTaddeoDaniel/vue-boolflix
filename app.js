@@ -80,41 +80,35 @@ new Vue({
                 })  
         },
 
-        ottieniPosterMedia: function(testo){
-            
-            if(testo == 'movie'){
-                console.log('movie')
+        ottieniPosterMedia: function(typeMedia){
 
-                this.movies.forEach( (movie,index) => {
-                    if(movie.poster_path != null){
-                        movie.poster_path = 'https://image.tmdb.org/t/p/original'+movie.poster_path;
-                        console.log(index + ' - ' + movie.poster_path)
-                    }
-                });
-
-            } else if ( testo == 'serieTv'){
-                console.log('serieTv')
-
-                this.serieTv.forEach( (serie,index) => {
-                    if(serie.poster_path != null){
-                        serie.poster_path = 'https://image.tmdb.org/t/p/original'+serie.poster_path;
-                        console.log(index + ' - ' + serie.poster_path)
-                    }
-                });
-
-
-            }
-        },
-
-        votoInStelle: function(typeMedia){
-            
+            // tipo di array da prendere
             if( typeMedia == 'movie'){
                 array = this.movies;
             } else {
                 array = this.serieTv;
             }
 
-            // add to visibility item variable
+            // aggiungi link collegamento
+            array.forEach( (movie,index) => {
+                if(movie.poster_path != null){
+                    movie.poster_path = 'https://image.tmdb.org/t/p/original'+movie.poster_path;
+                    console.log(index + ' - ' + movie.poster_path)
+                }
+            });
+            
+        },
+
+        votoInStelle: function(typeMedia){
+            
+            // tipo di array da prendere
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
+            }
+
+            // add to stelle oggetto
              array = array.map( (movie, index) =>{
                 let votoStelle = {
                     voto: 0,
@@ -151,18 +145,20 @@ new Vue({
             })
         },
 
-        typeMedia: function(type){
-            console.log(type)
-            if(type == 'movie'){
-                this.movies = this.movies.map( disco =>{
-                    return { ...disco, type: type};
-                })
+        typeMedia: function(typeMedia){
 
-            } else if(type == 'serieTv'){
-                this.serieTv = this.serieTv.map( disco =>{
-                    return { ...disco, type: type};
-                })
+            // tipo di array da prendere
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
             }
+
+            array = array.map( (disco,index) => {
+                array[index] = { ...disco, type: typeMedia};
+            })
+
+            
             
         },
 
