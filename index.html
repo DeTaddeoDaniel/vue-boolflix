@@ -29,8 +29,8 @@
             </div>
             
             <div class="header text-gray-400 text-center">
-                <input type="text" v-model="searchInput" @keyup.enter="ottieniMovies">
-                <button @click="ottieniMovies">Search</button>
+                <input type="text" v-model="searchInput" @keyup.enter="getDataAPI">
+                <button @click="getDataAPI">Search</button>
             </div>
 
             <div class="main">

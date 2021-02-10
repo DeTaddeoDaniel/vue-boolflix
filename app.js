@@ -13,6 +13,7 @@ new Vue({
         // array film from API
         movies: [],
         media:[],
+        serieTv:[],
 
         // array country
         countries: []
@@ -23,6 +24,11 @@ new Vue({
     },
 
     methods: {
+
+        getDataAPI:function(){
+            this.ottieniMovies();
+            this.ottieniSerieTv();
+        },
 
         ottieniMovies: function(){
 
@@ -47,8 +53,31 @@ new Vue({
                     console.log('Error in the API media');
                     console.log(error);
                 })
+        },
 
-            
+        ottieniSerieTv: function(){
+
+            axios
+                .get('https://api.themoviedb.org/3/search/tv', {params:{
+                    api_key: '7d986f5d7f72343a109e093583f2df92',
+                    query: this.searchInput,
+                    language: 'it'
+                }})
+                
+                .then(dataAPI =>{
+                    this.serieTv = dataAPI.data.results
+                    console.log(this.serieTv)
+                    this.ottieniPosterMedia()
+                    this.votoInStelle()
+                    this.typeMedia('movie')
+                    this.addMediaArray()
+                    
+                })
+
+                .catch(error =>{
+                    console.log('Error in the API media');
+                    console.log(error);
+                })  
         },
 
         ottieniPosterMedia: function(){
@@ -105,7 +134,8 @@ new Vue({
         },
 
         addMediaArray: function(){
-            this.media = this.movies
+            this.media = this.movies.concat(this.serieTv)
+            console.log(this.media)
         }
 
     },
