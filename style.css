@@ -94,3 +94,19 @@ img{
 .stelle li{
     letter-spacing: 2px;
 }
+
+.movie .content{
+    position: relative;
+}
+
+.typeMedia{
+    right: 0;
+    top: 0;
+    position: absolute;
+    padding: 6px 12px;
+    background-color: darkblue;
+    text-transform: uppercase;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+}

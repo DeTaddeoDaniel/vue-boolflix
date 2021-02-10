@@ -40,6 +40,8 @@
                     <div class="movie" v-for="movie in this.movies">
                         <div class="content">
 
+                            <span class="typeMedia">{{movie.type}}</span>
+
                             <div class="card-header">
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
                                 <img v-else src="imgNonDisponibile.png">
