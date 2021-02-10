@@ -4,6 +4,9 @@ new Vue({
     data:{
         test: 'test',
 
+        // numero Stelle massimo
+        maxStelle: 5,
+
         // testo input
         searchInput: 'pippo',
 
@@ -59,21 +62,33 @@ new Vue({
              this.movies = this.movies.map( movie =>{
                 let votoStelle = {
                     voto: 0,
-                    stellaMeta: false
+                    stellaMeta: false,
+                    mancanti: 0
                 }
 
+                // numero stelle piene
                 votoStelle.voto = Math.floor(movie.vote_average / 2);
-                // console.log('voto stelle piene: ' + votoStelle.voto);
+                console.log('voto stelle piene: ' + votoStelle.voto);
 
+                // numero decimale per stella meta eventuale
                 let decimali = parseInt((movie.vote_average / 2 - votoStelle.voto) * 100);
                 console.log('voto stella meta: ' + decimali);
 
+                // base al valore decimale decise se mostrare o non la stella
                 if(decimali >= 50 && votoStelle.voto < 10){
                     votoStelle.stellaMeta = true;
                 } else {
                     votoStelle.stellaMeta = false;
                 }
 
+                // numero di stelle vuote
+                if(votoStelle.stellaMeta){
+                    votoStelle.mancanti = this.maxStelle - votoStelle.voto - 1;
+                } else{
+                    votoStelle.mancanti = this.maxStelle - votoStelle.voto;
+                }
+
+                // stampa oggetto stelle
                 console.log(votoStelle)
 
                 return { ...movie, votoStelle};

@@ -86,3 +86,11 @@ img{
     font-size: 25px;
     text-align: center;
 }
+
+.d-flex{
+    display: flex;
+}
+
+.stelle li{
+    letter-spacing: 2px;
+}
