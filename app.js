@@ -41,8 +41,8 @@ new Vue({
                 
                 .then(dataAPI =>{
                     this.movies = dataAPI.data.results
-                    console.log(this.movies)
-                    this.ottieniPosterMedia()
+                    // console.log(this.movies)
+                    this.ottieniPosterMedia('movie')
                     this.votoInStelle()
                     this.typeMedia('movie')
                     this.addMediaArray()
@@ -67,7 +67,7 @@ new Vue({
                 .then(dataAPI =>{
                     this.serieTv = dataAPI.data.results
                     console.log(this.serieTv)
-                    this.ottieniPosterMedia()
+                    this.ottieniPosterMedia('tv')
                     this.votoInStelle()
                     this.typeMedia('serieTv')
                     this.addMediaArray()
@@ -80,12 +80,30 @@ new Vue({
                 })  
         },
 
-        ottieniPosterMedia: function(){
-            this.movies.forEach( movie => {
-                        if(movie.poster_path != null){
-                            movie.poster_path = 'https://image.tmdb.org/t/p/original'+movie.poster_path;
-                        }
-                    });
+        ottieniPosterMedia: function(testo){
+            
+            if(testo == 'movie'){
+                console.log('movie')
+
+                this.movies.forEach( (movie,index) => {
+                    if(movie.poster_path != null){
+                        movie.poster_path = 'https://image.tmdb.org/t/p/original'+movie.poster_path;
+                        console.log(index + ' - ' + movie.poster_path)
+                    }
+                });
+
+            } else if ( testo == 'tv'){
+                console.log('tv')
+
+                this.serieTv.forEach( (serie,index) => {
+                    if(serie.poster_path != null){
+                        serie.poster_path = 'https://image.tmdb.org/t/p/original'+serie.poster_path;
+                        console.log(index + ' - ' + serie.poster_path)
+                    }
+                });
+
+
+            }
         },
 
         votoInStelle: function(){
@@ -100,11 +118,11 @@ new Vue({
 
                 // numero stelle piene
                 votoStelle.voto = Math.floor(movie.vote_average / 2);
-                console.log('voto stelle piene: ' + votoStelle.voto);
+                // console.log('voto stelle piene: ' + votoStelle.voto);
 
                 // numero decimale per stella meta eventuale
                 let decimali = parseInt((movie.vote_average / 2 - votoStelle.voto) * 100);
-                console.log('voto stella meta: ' + decimali);
+                // console.log('voto stella meta: ' + decimali);
 
                 // base al valore decimale decise se mostrare o non la stella
                 if(decimali >= 50 && votoStelle.voto < 10){
@@ -121,7 +139,7 @@ new Vue({
                 }
 
                 // stampa oggetto stelle
-                console.log(votoStelle)
+                // console.log(votoStelle)
 
                 return { ...movie, votoStelle};
             })

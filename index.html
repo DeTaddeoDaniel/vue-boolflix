@@ -37,7 +37,9 @@
 
                 <div class="moviesAll">
                     
-                    <div class="movie" v-for="movie in media">
+                    <div class="movie" v-for="(movie, index) in media">
+
+                        <p>{{index}}</p>
                         
                         <!-- movie -->
                         <div class="content" v-if="movie.type == 'movie'">
