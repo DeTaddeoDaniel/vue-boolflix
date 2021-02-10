@@ -74,6 +74,26 @@ new Vue({
                 })  
         },
 
+        // ottieni overview se esistente
+        ottieniOverviewMovieData: function(movie_id){
+
+            axios
+                .get('https://api.themoviedb.org/3/movie', {params:{
+                    api_key: '7d986f5d7f72343a109e093583f2df92',
+                    language: 'it',
+                    movie_id: movie_id
+
+                }})
+                
+                .then(dataAPI =>{
+                    console.log(dataAPI.results);
+                })
+
+                .catch((error, movie_id) =>{
+                   this.erroreAPI(error, 'overview id '+ movie_id)
+                })  
+        },
+
         // gestione e modifica dati ricevuti dalle API
         modificheDataRicevuti: function(typeElement){
 
@@ -81,7 +101,30 @@ new Vue({
             this.typeMedia(typeElement)
             this.ottieniPosterMedia(typeElement)
             this.votoInStelle(typeElement)
+            this.ottieniOverview(typeElement)
             this.addMediaArray()
+        },
+
+        // richiesta immagine poster media
+        ottieniOverview: function(typeMedia){
+
+            // tipo di array da prendere ( move o serie tv)
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
+            }
+
+            // aggiorna indirizzo path poster con url completo
+            array.forEach( (movie,index) => {
+
+                // controlla se esiste un immagine del media
+                console.log(movie)
+                if(typeMedia == 'tv'){
+                    
+                }
+            });
+            
         },
 
         // richiesta immagine poster media
@@ -183,6 +226,7 @@ new Vue({
         // riempio array che uso per stampare tutti i media ricevuti mediante API
         addMediaArray: function(){
             this.media = this.movies.concat(this.serieTv)
+            console.log('media')
             console.log(this.media)
         }
 
