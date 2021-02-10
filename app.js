@@ -21,10 +21,6 @@ new Vue({
         countries: []
     },
 
-    beforeMount() {
-
-    },
-
     methods: {
 
         // chiedi alle API movie e serie tv corrispodenti
@@ -44,11 +40,10 @@ new Vue({
                 }})
                 
                 .then(dataAPI =>{
-                    this.movies = dataAPI.data.results
-                    this.typeMedia('movie')
-                    this.ottieniPosterMedia('movie')
-                    this.votoInStelle('movie')
-                    this.addMediaArray()
+                    this.movies = dataAPI.data.results;
+                    console.log('movies');
+                    console.log(this.movies);
+                    this.modificheDataRicevuti('movie');
                     
                 })
 
@@ -69,17 +64,24 @@ new Vue({
                 
                 .then(dataAPI =>{
                     this.serieTv = dataAPI.data.results
-                    console.log(this.serieTv)
-                    this.typeMedia('serieTv')
-                    this.ottieniPosterMedia('serieTv')
-                    this.votoInStelle('serieTv')
-                    this.addMediaArray()
-                    
+                    console.log(this.serieTv);
+                    console.log('serieTv');
+                    this.modificheDataRicevuti('serieTv');
                 })
 
                 .catch(error =>{
                    this.erroreAPI(error, 'serie tv')
                 })  
+        },
+
+        // gestione e modifica dati ricevuti dalle API
+        modificheDataRicevuti: function(typeElement){
+
+            // inserisce e modifica eventuali attributi per la visualizzazione
+            this.typeMedia(typeElement)
+            this.ottieniPosterMedia(typeElement)
+            this.votoInStelle(typeElement)
+            this.addMediaArray()
         },
 
         // richiesta immagine poster media
@@ -98,15 +100,17 @@ new Vue({
                 // controlla se esiste un immagine del media
                 if(movie.poster_path != null){
                     movie.poster_path = 'https://image.tmdb.org/t/p/w342'+movie.poster_path;
-                    console.log(index + ' - ' + movie.poster_path)
+                    // console.log(index + ' - ' + movie.poster_path)
                 }
             });
             
         },
 
+        // gestione errori API
         erroreAPI: function(error, info){
-            console.log('Error in the API ' + info);
+            alert('Error in the API ' + info + '\nPer informazione dell\'errore guardare la console log');
             console.log(error);
+            
         },
 
         // trasforma il voto in base 10 a base 2 con le stelle
@@ -152,7 +156,7 @@ new Vue({
                 }
 
                 // stampa oggetto stelle
-                console.log(votoStelle)
+                // console.log(votoStelle)
 
                 // aggiorna oggetto media con la variabile oggetto voto stelle
                 array[index] = { ...movie, votoStelle};
