@@ -23,6 +23,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 
@@ -75,6 +76,7 @@ body{
 
 .card-main{
     display: none;
+    transition: all .2s ease-in-out;
     font-size: 1rem;
 }
 
@@ -86,7 +88,7 @@ body{
     font-weight: normal;
 }
 
-.boxPoster:hover + .card-main{
+.movie:hover .card-main{
     position: absolute;
     display: block;
     z-index: 1;
