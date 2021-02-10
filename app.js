@@ -67,8 +67,8 @@ new Vue({
                 .then(dataAPI =>{
                     this.serieTv = dataAPI.data.results
                     console.log(this.serieTv)
-                    this.typeMedia('tv')
-                    this.ottieniPosterMedia('tv')
+                    this.typeMedia('serieTv')
+                    this.ottieniPosterMedia('serieTv')
                     this.votoInStelle()
                     this.addMediaArray()
                     
@@ -92,8 +92,8 @@ new Vue({
                     }
                 });
 
-            } else if ( testo == 'tv'){
-                console.log('tv')
+            } else if ( testo == 'serieTv'){
+                console.log('serieTv')
 
                 this.serieTv.forEach( (serie,index) => {
                     if(serie.poster_path != null){
@@ -152,7 +152,7 @@ new Vue({
                     return { ...disco, type: type};
                 })
 
-            } else if(type == 'tv'){
+            } else if(type == 'serieTv'){
                 this.serieTv = this.serieTv.map( disco =>{
                     return { ...disco, type: type};
                 })
