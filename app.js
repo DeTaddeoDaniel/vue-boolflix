@@ -44,7 +44,7 @@ new Vue({
                     // console.log(this.movies)
                     this.typeMedia('movie')
                     this.ottieniPosterMedia('movie')
-                    this.votoInStelle()
+                    this.votoInStelle('movie')
                     this.addMediaArray()
                     
                 })
@@ -69,7 +69,7 @@ new Vue({
                     console.log(this.serieTv)
                     this.typeMedia('serieTv')
                     this.ottieniPosterMedia('serieTv')
-                    this.votoInStelle()
+                    this.votoInStelle('serieTv')
                     this.addMediaArray()
                     
                 })
@@ -106,10 +106,16 @@ new Vue({
             }
         },
 
-        votoInStelle: function(){
+        votoInStelle: function(typeMedia){
             
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
+            }
+
             // add to visibility item variable
-             this.movies = this.movies.map( movie =>{
+             array = array.map( (movie, index) =>{
                 let votoStelle = {
                     voto: 0,
                     stellaMeta: false,
@@ -139,9 +145,9 @@ new Vue({
                 }
 
                 // stampa oggetto stelle
-                // console.log(votoStelle)
+                console.log(votoStelle)
 
-                return { ...movie, votoStelle};
+                array[index] = { ...movie, votoStelle};
             })
         },
 
