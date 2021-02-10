@@ -46,7 +46,7 @@
 
                             <span class="typeMedia">{{movie.type}}</span>
 
-                            <div class="card-header">
+                            <div class="">
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
                                 <img v-else src="imgNonDisponibile.png">
                             </div>
@@ -54,7 +54,7 @@
                                 <p>Titolo: <span>{{movie.title}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
                                 <p>Lingua originale: <span>{{movie.original_language}}</span></p>
-                                <p>Voto: <span>{{movie.vote_average}}</span></p>
+                                <p>Voto stella: <span>{{movie.votoStelle.votoNumericoStelle}}</span></p>
                                 <p>
                                         <span v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
                                         --><span v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
@@ -77,6 +77,7 @@
                                 <p>Titolo: <span>{{movie.name}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_name}}</span></p>
                                 <p>Lingua originale: <span>{{movie.original_language}}</span></p>
+                                <p>Trama: <span>{{}}</span></p>
                                 <p>Voto: <span>{{movie.vote_average}}</span></p>
                                     <span v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
                                     --><span v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
