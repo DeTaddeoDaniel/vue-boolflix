@@ -42,9 +42,9 @@ new Vue({
                 .then(dataAPI =>{
                     this.movies = dataAPI.data.results
                     // console.log(this.movies)
+                    this.typeMedia('movie')
                     this.ottieniPosterMedia('movie')
                     this.votoInStelle()
-                    this.typeMedia('movie')
                     this.addMediaArray()
                     
                 })
@@ -67,9 +67,9 @@ new Vue({
                 .then(dataAPI =>{
                     this.serieTv = dataAPI.data.results
                     console.log(this.serieTv)
+                    this.typeMedia('tv')
                     this.ottieniPosterMedia('tv')
                     this.votoInStelle()
-                    this.typeMedia('serieTv')
                     this.addMediaArray()
                     
                 })
@@ -146,9 +146,18 @@ new Vue({
         },
 
         typeMedia: function(type){
-            this.movies = this.movies.map( disco =>{
-                return { ...disco, type: type};
-            })
+            console.log(type)
+            if(type == 'movie'){
+                this.movies = this.movies.map( disco =>{
+                    return { ...disco, type: type};
+                })
+
+            } else if(type == 'tv'){
+                this.serieTv = this.serieTv.map( disco =>{
+                    return { ...disco, type: type};
+                })
+            }
+            
         },
 
         addMediaArray: function(){

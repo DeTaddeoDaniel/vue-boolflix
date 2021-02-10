@@ -65,7 +65,7 @@
                         </div>
 
                         <!-- serie tv -->
-                        <div class="content" v-if="movie.type == 'serieTv'">
+                        <div class="content" v-if="movie.type == 'tv'">
 
                             <span class="typeMedia">{{movie.type}}</span>
 
@@ -74,14 +74,12 @@
                                 <img v-else src="imgNonDisponibile.png">
                             </div>
                             <div class="card-main">
-                                <p>Titolo: <span>{{movie.title}}</span></p>
-                                <p>Titolo originale: <span>{{movie.original_title}}</span></p>
-                                <p>Lingua originale: <span>{{movie.original_language}}</span></p>
-                                <p>Voto: <span>{{movie.vote_average}}</span></p>
+                                <!-- <p>Titolo: <span>{{movie.title}}</span></p> -->
+                                <!-- <p>Titolo originale: <span>{{movie.original_title}}</span></p> -->
+                                <!-- <p>Lingua originale: <span>{{movie.original_language}}</span></p> -->
+                                <!-- <p>Voto: <span>{{movie.vote_average}}</span></p> -->
                                 <p>
-                                    <span v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
-                                    --><span v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
-                                    --><span v-for="index in movie.votoStelle.mancanti"> <i class="far fa-star"></i> </span>
+                                    
                                 </p>
                             </div>
 
