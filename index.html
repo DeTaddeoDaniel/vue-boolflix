@@ -24,14 +24,21 @@
     <div class="wrapper">
         <div class="container mx-auto" id="app">
 
-            <div class="header text-gray-400 text-center">
-                <h1 class="text-6xl">Boolflix</h1>
+            <div class="header">
+                
+                <!-- left -->
+                <div class="box">
+                    <h1 class="logo">Boolflix</h1>
+                </div>
+                
+                <!-- right -->
+                <div class="box">
+                    <input type="text" v-model="searchInput" @keyup.enter="getDataAPI" placeholder="Cerca un film o serie tv">
+                        <button @click="getDataAPI">Search</button>
+                    </input>
+                </div>
             </div>
             
-            <div class="header text-gray-400 text-center">
-                <input type="text" v-model="searchInput" @keyup.enter="getDataAPI">
-                <button @click="getDataAPI">Search</button>
-            </div>
 
             <div class="main">
 
