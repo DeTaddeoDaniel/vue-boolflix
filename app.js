@@ -37,6 +37,7 @@ new Vue({
                     console.log(this.movies)
                     this.ottieniPosterMedia()
                     this.votoInStelle()
+                    this.typeMedia('movie')
                     
                 })
 
@@ -92,6 +93,12 @@ new Vue({
                 console.log(votoStelle)
 
                 return { ...movie, votoStelle};
+            })
+        },
+
+        typeMedia: function(type){
+            this.movies = this.movies.map( disco =>{
+                return { ...disco, type: type};
             })
         }
 
