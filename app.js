@@ -19,6 +19,7 @@ new Vue({
 
         // genere media
         genereMediaLista: [],
+        selectText:'All',
 
         // array country
         countries: []
@@ -275,6 +276,11 @@ new Vue({
             this.media = this.movies.concat(this.serieTv)
             // console.log('media')
             // console.log(this.media)
+        },
+
+        // filtra elementi per genere
+        filter: function(){
+            console.log(this.selectText)
         }
 
     },

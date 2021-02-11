@@ -42,6 +42,14 @@
             
             <div class="main">
 
+                <div class="header-main">
+                    <div> Filtra per genere la ricerca</div>
+                    <select @change="filter" v-model="selectText">
+                        <option value="All">All</option>
+                        <option v-for="genere in genereMediaLista" :value="genere.name">{{genere.name}}</option>
+                    </select>
+                </div>
+
                 <div class="mediaAll">
                     
                     <div class="movie" v-for="(movie, index) in media">
@@ -95,6 +103,7 @@
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
                                 <img v-else class="imgNotFound" src="imgNonDisponibile.png">
                             </div>
+
                             <div class="card-main">
                                 <p>Titolo: <span>{{movie.name}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_name}}</span></p>
