@@ -64,7 +64,7 @@
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
                                 <p>Genere: 
                                     <span v-if="movie.genre_ids.length != 0" v-for="(genere,index) in movie.genre_ids.length">
-                                        {{movie.genre_ids[index]}}<!-
+                                        {{movie.genre_ids[index]}}<!--
                                         --><span v-if="index < movie.genre_ids.length -1">,</span>
                                     </span>
                                     <span v-if="movie.genre_ids.length == 0"> Non disponibile</span>
@@ -88,6 +88,8 @@
                         <div class="content" v-if="movie.type == 'serieTv'">
 
                             <span class="typeMedia">{{movie.type}}</span>
+                            <span v-if="true" class="save"><i class="far fa-heart"></i></span>
+                            <span v-if="false" class="save"><i class="fas fa-heart"></i></span>
 
                             <div class="boxPoster">
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">

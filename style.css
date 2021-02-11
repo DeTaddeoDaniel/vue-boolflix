@@ -150,3 +150,15 @@ img{
     font-weight: bold;
     color: white;
 }
+
+.save{
+    left: 0;
+    top: 0;
+    position: absolute;
+    padding: 6px 12px;
+    background-color: indigo;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+}
