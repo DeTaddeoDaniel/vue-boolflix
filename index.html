@@ -62,8 +62,11 @@
                             <div class="card-main">
                                 <p>Titolo: <span>{{movie.title}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
-                                <p>Generi: 
-                                    <span v-for="(genere,index) in movie.genre_ids">{{genere}},</span>
+                                <p>Genere: 
+                                    <span v-if="movie.genre_ids.length != 0" v-for="(genere,index) in movie.genre_ids.length">
+                                        {{movie.genre_ids[index]}}<!-
+                                        --><span v-if="index < movie.genre_ids.length -1">,</span>
+                                    </span>
                                     <span v-if="movie.genre_ids.length == 0"> Non disponibile</span>
                                 </p>
                                 <!-- <p>Voto stella: <span>{{movie.votoStelle.votoNumericoStelle}}</span></p> -->
