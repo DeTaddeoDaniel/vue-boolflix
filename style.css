@@ -95,6 +95,7 @@ body{
 .card-main p{
     font-weight: bold;
     padding: 4px 0;
+    word-wrap: break-word;
 }
 
 .card-main p span{

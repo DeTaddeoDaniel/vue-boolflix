@@ -256,6 +256,9 @@ new Vue({
                             // sostutuisci id con nome del genere
                             movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name;
 
+                        // cancella id non associato
+                        } else {
+                            movie.genre_ids.splice(index, 1)
                         }
 
                     })
