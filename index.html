@@ -63,7 +63,7 @@
                                 <p>Titolo: <span>{{movie.title}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
                                 <p>Generi: 
-                                    <span v-for="(genere,index) in movie.genre_ids">{{index}}-{{genere}},</span>
+                                    <span v-for="(genere,index) in movie.genre_ids">{{genere}},</span>
                                     <span v-if="movie.genre_ids.length == 0"> Non disponibile</span>
                                 </p>
                                 <!-- <p>Voto stella: <span>{{movie.votoStelle.votoNumericoStelle}}</span></p> -->
@@ -95,7 +95,7 @@
                                 <p>Titolo originale: <span>{{movie.original_name}}</span></p>
                                 <p>Lingua originale: <span>{{movie.original_language}}</span></p>
                                 <p>Generi: 
-                                    <span v-for="(genere,index) in movie.genre_ids">{{index}}-{{genere}},</span>
+                                    <span v-for="(genere,index) in movie.genre_ids">{{genere}},</span>
                                     <span v-if="movie.genre_ids.length == 0"> Non disponibile</span>
                                 </p>
                                 <p>Voto: <span>{{movie.vote_average}}</span></p>

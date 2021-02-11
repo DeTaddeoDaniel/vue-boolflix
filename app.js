@@ -224,36 +224,38 @@ new Vue({
             // Prendi un elemento movie singolarmente
              array = array.map( (movie, index) =>{
                 
-                console.log('movie ' + index)
-                console.log(movie)
-
                 if(movie.genre_ids.length != 0){
                     
-                    console.log(movie.genre_ids)
-                    
+                    // prendi ogni numero presente del array generi
                     movie.genre_ids.forEach( (genere, index) => {
                         
-                        console.log(index+'-'+genere);
+                        // variabili while coppia e variabile uscita
+                        let indexCoppia = 0;
+                        let trovato = false;
                         
-                        let indexCoppia = 0
-                        let trovato = false
-                        
+                        // trova lo stesso id
                         while(!trovato && indexCoppia < this.genereMediaLista.length){
-                            console.log(this.genereMediaLista[indexCoppia].id)
-                            console.log(typeof(genere)+'-'+genere)
                             
+                            // confronta numero id movie e numero id generi
                             if(parseInt(genere) == this.genereMediaLista[indexCoppia].id){
-                                console.log('corrispodenza: '+this.genereMediaLista[indexCoppia].name)
-                                trovato = true
+                                
+                                // esci dal ciclo perchè è stat trovato
+                                trovato = true;
+                                console.log('corrispodenza: '+this.genereMediaLista[indexCoppia].name);
+
+                            // continua al successivo elemento id generi
                             } else {
-                                indexCoppia++
+                                indexCoppia++;
                             }
 
                         }
 
-                        console.log(indexCoppia)
+                        // controlla se esiste id genere associato
                         if(indexCoppia != this.genereMediaLista.length){
-                            movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name
+                            
+                            // sostutuisci id con nome del genere
+                            movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name;
+
                         }
 
                     })
