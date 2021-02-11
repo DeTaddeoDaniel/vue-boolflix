@@ -291,8 +291,8 @@ new Vue({
 
                 this.media.forEach( (media,index) => {
 
-                    console.log(this.selectText)
-                    console.log(media.genre_ids)
+                    // console.log(this.selectText)
+                    // console.log(media.genre_ids)
                     
                     if(media.genre_ids.includes(this.selectText)){
                         media.visibility = true;
@@ -305,6 +305,22 @@ new Vue({
                 this.media.forEach( (media,index) => {
                     media.visibility = true;
                 })
+            }
+
+            if( this.selectType != 'All'){
+
+                this.media.forEach( (media,index) => {
+
+                    // console.log(this.selectText)
+                    // console.log(media.genre_ids)
+                    
+                    if(media.type == this.selectType && media.visibility){
+                        media.visibility = true;
+                    } else {
+                        media.visibility = false;
+                    }
+                })
+
             }
         },
 
