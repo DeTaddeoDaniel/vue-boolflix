@@ -48,8 +48,8 @@ new Vue({
                 
                 .then(dataAPI =>{
                     this.movies = dataAPI.data.results;
-                    console.log('movies');
-                    console.log(this.movies);
+                    // console.log('movies');
+                    // console.log(this.movies);
                     this.modificheDataRicevuti('movie');
                     
                 })
@@ -72,7 +72,7 @@ new Vue({
                 .then(dataAPI =>{
                     this.serieTv = dataAPI.data.results
                     console.log(this.serieTv);
-                    console.log('serieTv');
+                    // console.log('serieTv');
                     this.modificheDataRicevuti('serieTv');
                 })
 
@@ -92,8 +92,8 @@ new Vue({
                 
                 .then(dataAPI =>{
                     this.genereMediaLista = dataAPI.data.genres;
-                    console.log('generi media');
-                    console.log(this.genereMediaLista);
+                    // console.log('generi media');
+                    // console.log(this.genereMediaLista);
                     
                 })
 
@@ -109,7 +109,7 @@ new Vue({
             this.typeMedia(typeElement)
             this.ottieniPosterMedia(typeElement)
             this.votoInStelle(typeElement)
-            this.generiMedia(this.typeMedia)
+            this.generiMedia(typeElement)
             this.addMediaArray()
         },
 
@@ -211,6 +211,8 @@ new Vue({
 
         // aggiungi campo array i generi da numeri  (movie e serie tv)
         generiMedia: function(typeMedia){
+
+            console.log(typeMedia)
             
             // tipo di array da prendere
             if( typeMedia == 'movie'){
@@ -219,33 +221,55 @@ new Vue({
                 array = this.serieTv;
             }
 
-            // add to stelle oggetto
+            // Prendi un elemento movie singolarmente
              array = array.map( (movie, index) =>{
+                
+                console.log('movie ' + index)
+                console.log(movie)
 
-                // variabile oggetto che indica il numero di stelle piene, stelle vuote e eventuale stella mezza piena
-                let generiLista = [];
+                if(movie.genre_ids.length != 0){
+                    
+                    console.log(movie.genre_ids)
+                    
+                    movie.genre_ids.forEach( (genere, index) => {
+                        
+                        console.log(index+'-'+genere);
+                        
+                        let indexCoppia = 0
+                        let trovato = false
+                        
+                        while(!trovato && indexCoppia < this.genereMediaLista.length){
+                            console.log(this.genereMediaLista[indexCoppia].id)
+                            console.log(typeof(genere)+'-'+genere)
+                            
+                            if(parseInt(genere) == this.genereMediaLista[indexCoppia].id){
+                                console.log('corrispodenza: '+this.genereMediaLista[indexCoppia].name)
+                                trovato = true
+                            } else {
+                                indexCoppia++
+                            }
 
-                // variabile d'uscita
-                let count = 0;
+                        }
 
-                // riempi array generi con testo
-                while(count < movie.genre_ids.length){
+                        console.log(indexCoppia)
+                        if(indexCoppia != this.genereMediaLista.length){
+                            movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name
+                        }
 
-                    console.log(movie.genre_ids[count]);
-                    console.log(this.genereMediaLista[0].id)
-                    count++;
+                    })
+
+                } else{
+                    console.log('media generi non disponibili')
                 }
 
-                // stampa oggetto stelle
-                console.log(generiLista);
             })
         },
 
         // riempio array che uso per stampare tutti i media ricevuti mediante API
         addMediaArray: function(){
             this.media = this.movies.concat(this.serieTv)
-            console.log('media')
-            console.log(this.media)
+            // console.log('media')
+            // console.log(this.media)
         }
 
     },
