@@ -20,6 +20,7 @@ new Vue({
         // genere media
         genereMediaLista: [],
         selectText:'All',
+        selectType:'All',
 
         // array country
         countries: []
@@ -113,6 +114,7 @@ new Vue({
             this.generiMedia(typeElement)
             this.addVisibiliy(typeElement)
             this.addMediaArray()
+            this.filter()
         },
 
         // richiesta immagine poster media
@@ -228,6 +230,7 @@ new Vue({
                 
                 if(movie.genre_ids.length != 0){
                     
+                        let test = 0;
                     // prendi ogni numero presente del array generi
                     movie.genre_ids.forEach( (genere, index) => {
                         
@@ -243,7 +246,8 @@ new Vue({
                                 
                                 // esci dal ciclo perchè è stat trovato
                                 trovato = true;
-                                console.log('corrispodenza: '+this.genereMediaLista[indexCoppia].name);
+                                console.log(test +' - corrispodenza: '+this.genereMediaLista[indexCoppia].name);
+                                test++;
 
                             // continua al successivo elemento id generi
                             } else {
@@ -260,6 +264,7 @@ new Vue({
 
                         // cancella id non associato
                         } else {
+                            console.log('Non trovato')
                             movie.genre_ids.splice(index, 1)
                         }
 
@@ -281,7 +286,26 @@ new Vue({
 
         // filtra elementi per genere
         filter: function(){
-            console.log(this.selectText)
+            
+            if( this.selectText != 'All'){
+
+                this.media.forEach( (media,index) => {
+
+                    console.log(this.selectText)
+                    console.log(media.genre_ids)
+                    
+                    if(media.genre_ids.includes(this.selectText)){
+                        media.visibility = true;
+                    } else {
+                        media.visibility = false;
+                    }
+                })
+
+            } else {
+                this.media.forEach( (media,index) => {
+                    media.visibility = true;
+                })
+            }
         },
 
          // add to visibility item variable

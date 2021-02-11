@@ -43,16 +43,26 @@
             <div class="main">
 
                 <div class="header-main">
-                    <div> Filtra per genere la ricerca</div>
-                    <select @change="filter" v-model="selectText">
-                        <option value="All">All</option>
-                        <option v-for="genere in genereMediaLista" :value="genere.name">{{genere.name}}</option>
-                    </select>
+                    <div>
+                        <p> Filtra per genere la ricerca</p>
+                        <select @change="filter" v-model="selectText">
+                            <option value="All">All</option>
+                            <option v-for="genere in genereMediaLista" :value="genere.name">{{genere.name}}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p> Filtra per tipo</p>
+                        <select @change="filter" v-model="selectType">
+                            <option value="All">All</option>
+                            <option value="serieTv">serie tv</option>
+                            <option value="Movie">Movie</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="mediaAll">
                     
-                    <div class="movie" v-for="(movie, index) in media">
+                    <div class="movie" v-if="movie.visibility" v-for="(movie, index) in media">
                         
                         <!-- movie -->
                         <div class="content" v-if="movie.type == 'movie'">
@@ -108,8 +118,11 @@
                                 <p>Titolo: <span>{{movie.name}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_name}}</span></p>
                                 <p>Lingua originale: <span>{{movie.original_language}}</span></p>
-                                <p>Generi: 
-                                    <span v-for="(genere,index) in movie.genre_ids">{{genere}},</span>
+                                <p>Genere: 
+                                    <span v-if="movie.genre_ids.length != 0" v-for="(genere,index) in movie.genre_ids.length">
+                                        {{movie.genre_ids[index]}}<!--
+                                        --><span v-if="index < movie.genre_ids.length -1">,</span>
+                                    </span>
                                     <span v-if="movie.genre_ids.length == 0"> Non disponibile</span>
                                 </p>
                                 <p>Voto: <span>{{movie.vote_average}}</span></p>
