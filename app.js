@@ -111,6 +111,7 @@ new Vue({
             this.ottieniPosterMedia(typeElement)
             this.votoInStelle(typeElement)
             this.generiMedia(typeElement)
+            this.addVisibiliy(typeElement)
             this.addMediaArray()
         },
 
@@ -281,6 +282,22 @@ new Vue({
         // filtra elementi per genere
         filter: function(){
             console.log(this.selectText)
+        },
+
+         // add to visibility item variable
+        addVisibiliy: function(typeMedia){
+
+            // tipo di array da prendere ( move o serie tv)
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
+            }
+
+            // aggiungi attributo visibility a tutti gli elementi
+            array = array.map( media =>{
+                return { ...media, visibility : true};
+            })
         }
 
     },
