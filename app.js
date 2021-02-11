@@ -109,6 +109,7 @@ new Vue({
             this.typeMedia(typeElement)
             this.ottieniPosterMedia(typeElement)
             this.votoInStelle(typeElement)
+            this.generiMedia(this.typeMedia)
             this.addMediaArray()
         },
 
@@ -206,6 +207,38 @@ new Vue({
                 array[index] = { ...disco, type: typeMedia};
             }) 
             
+        },
+
+        // aggiungi campo array i generi da numeri  (movie e serie tv)
+        generiMedia: function(typeMedia){
+            
+            // tipo di array da prendere
+            if( typeMedia == 'movie'){
+                array = this.movies;
+            } else {
+                array = this.serieTv;
+            }
+
+            // add to stelle oggetto
+             array = array.map( (movie, index) =>{
+
+                // variabile oggetto che indica il numero di stelle piene, stelle vuote e eventuale stella mezza piena
+                let generiLista = [];
+
+                // variabile d'uscita
+                let count = 0;
+
+                // riempi array generi con testo
+                while(count < movie.genre_ids.length){
+
+                    console.log(movie.genre_ids[count]);
+                    console.log(this.genereMediaLista[0].id)
+                    count++;
+                }
+
+                // stampa oggetto stelle
+                console.log(generiLista);
+            })
         },
 
         // riempio array che uso per stampare tutti i media ricevuti mediante API
