@@ -53,7 +53,10 @@
 
                             <div class="boxPoster">
                                 <img v-if="movie.poster_path != null" :src="movie.poster_path" :alt="movie.title">
-                                <img v-else class="imgNotFound" src="imgNonDisponibile.png">
+                                <p v-else class="imgNotFound">
+                                    <i class="far fa-image"></i>
+                                    <span>Poster not found</span>
+                                </p>
                             </div>
 
                             <div class="card-main">

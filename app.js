@@ -17,8 +17,15 @@ new Vue({
         // array che mostra tutti i media
         media:[],
 
+        // genere media
+        genereMediaLista: [],
+
         // array country
         countries: []
+    },
+
+    beforeMount() {
+        this.ottieniGeneriMedia();
     },
 
     methods: {
@@ -74,6 +81,27 @@ new Vue({
                 })  
         },
 
+        // ottieni data generi dei media dellle api
+        ottieniGeneriMedia: function(){
+
+            axios
+                .get('https://api.themoviedb.org/3/genre/movie/list', {params:{
+                    api_key: '7d986f5d7f72343a109e093583f2df92',
+                    language: 'it'
+                }})
+                
+                .then(dataAPI =>{
+                    this.genereMediaLista = dataAPI.data.genres;
+                    console.log('generi media');
+                    console.log(this.genereMediaLista);
+                    
+                })
+
+                .catch(error =>{
+                    this.erroreAPI(error, 'genres media')
+                })
+        },
+
         // gestione e modifica dati ricevuti dalle API
         modificheDataRicevuti: function(typeElement){
 
@@ -99,7 +127,7 @@ new Vue({
 
                 // controlla se esiste un immagine del media
                 if(movie.poster_path != null){
-                    movie.poster_path = 'https://image.tmdb.org/t/p/w342'+movie.poster_path;
+                    movie.poster_path = 'https://image.tmdb.org/t/p/w500'+movie.poster_path;
                     // console.log(index + ' - ' + movie.poster_path)
                 }
             });

@@ -72,6 +72,17 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 250px;
+    text-align: center;
+}
+
+.boxPoster p{
+    font-size: 21px;
+}
+
+.boxPoster i{
+    display: block;
+    padding-bottom: 1rem;
+    font-size: 45px;
 }
 
 .card-main{
