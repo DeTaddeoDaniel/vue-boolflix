@@ -107,37 +107,37 @@ new Vue({
         // gestione e modifica dati ricevuti dalle API
         modificheDataRicevuti: function(typeElement){
 
-            // inserisce e modifica eventuali attributi per la visualizzazione
-            this.typeMedia(typeElement)
-            this.ottieniPosterMedia(typeElement)
-            this.votoInStelle(typeElement)
-            this.generiMedia(typeElement)
-            this.addVisibiliy(typeElement)
-            this.addMediaArray()
-            this.filter()
-        },
-
-        // richiesta immagine poster media
-        ottieniPosterMedia: function(typeMedia){
-
             // tipo di array da prendere ( move o serie tv)
-            if( typeMedia == 'movie'){
+            if( typeElement == 'movie'){
                 array = this.movies;
             } else {
                 array = this.serieTv;
             }
 
-            // aggiorna indirizzo path poster con url completo
-            array.forEach( (movie,index) => {
+            // mappa tutto il media e indice di posizione
+            array.map( (element, index) => {
 
-                // controlla se esiste un immagine del media
-                if(movie.poster_path != null){
-                    movie.poster_path = 'https://image.tmdb.org/t/p/w500'+movie.poster_path;
-                    // console.log(index + ' - ' + movie.poster_path)
+                // inserisci type dell'elemento
+                Vue.set(array[index], 'type', typeElement);
+
+                // inserisci visibility dell'elemento
+                Vue.set(array[index], 'visibility', true);
+
+                // inserisci poster dell'elemento
+                if(array[index].poster_path != null){
+                    Vue.set(array[index], 'poster_path', 'https://image.tmdb.org/t/p/w500' + element.poster_path)
                 }
-            });
+
+            })
             
+
+            this.votoInStelle(typeElement)
+            this.generiMedia(typeElement)
+            
+            this.addMediaArray()
+            this.filter()
         },
+
 
         // gestione errori API
         erroreAPI: function(error, info){
@@ -187,30 +187,10 @@ new Vue({
                 } else{
                     votoStelle.mancanti = this.maxStelle - votoStelle.voto;
                 }
-
-                // stampa oggetto stelle
-                // console.log(votoStelle)
-
+                
                 // aggiorna oggetto media con la variabile oggetto voto stelle
                 array[index] = { ...movie, votoStelle};
             })
-        },
-
-        // inserisce attributo type in base al tipo media (movie o serie tv)
-        typeMedia: function(typeMedia){
-
-            // tipo di array da prendere
-            if( typeMedia == 'movie'){
-                array = this.movies;
-            } else {
-                array = this.serieTv;
-            }
-
-            // aggiorna l'array scelto con attributo type del media specificato
-            array = array.map( (disco,index) => {
-                array[index] = { ...disco, type: typeMedia};
-            }) 
-            
         },
 
         // aggiungi campo array i generi da numeri  (movie e serie tv)
@@ -280,8 +260,6 @@ new Vue({
         // riempio array che uso per stampare tutti i media ricevuti mediante API
         addMediaArray: function(){
             this.media = this.movies.concat(this.serieTv)
-            // console.log('media')
-            // console.log(this.media)
         },
 
         // filtra elementi per genere
@@ -323,22 +301,6 @@ new Vue({
 
             }
         },
-
-         // add to visibility item variable
-        addVisibiliy: function(typeMedia){
-
-            // tipo di array da prendere ( move o serie tv)
-            if( typeMedia == 'movie'){
-                array = this.movies;
-            } else {
-                array = this.serieTv;
-            }
-
-            // aggiungi attributo visibility a tutti gli elementi
-            array = array.map( media =>{
-                return { ...media, visibility : true};
-            })
-        }
 
     },
 
