@@ -105,24 +105,44 @@ new Vue({
         },
 
         // ottieni data generi dei media dellle api
-        ottieniAttori: function(idMedia = 42434){
+        ottieniAttori: function(array){
+            
+            console.log(array);
 
-            axios
-                .get('https://api.themoviedb.org/3/movie/'+idMedia+'/credits', {params:{
-                    api_key: '7d986f5d7f72343a109e093583f2df92',
-                    language: 'it'
-                }})
-                
-                .then(dataAPI =>{
-                    let attoriLista = dataAPI.data.cast;
-                    console.log('attori lista');
-                    console.log(attoriLista);
+            array.map( (media, index) => {
+
+                let idMedia = media.id;
+
+                axios
+                    .get('https://api.themoviedb.org/3/movie/'+idMedia+'/credits', {params:{
+                        api_key: '7d986f5d7f72343a109e093583f2df92',
+                        language: 'it'
+                    }})
                     
-                })
+                    .then(dataAPI =>{
 
-                .catch(error =>{
-                    this.erroreAPI(error, 'attori error')
-                })
+                        let attoriLista = dataAPI.data.cast;
+                        console.log('attori lista');
+                        console.log(attoriLista);
+
+                        let attori = [];
+
+                        attoriLista.forEach(attore =>{
+
+                            if(attore.known_for_department == "Acting"){
+                                attori.push(attore.name);
+                            }                    
+                        });
+
+                        Vue.set(media, 'attori', attori);
+                    })
+
+                    .catch(error =>{
+                        Vue.set(media, 'attori', []);
+                    })
+            })
+
+
         },
 
         // gestione e modifica dati ricevuti dalle API
@@ -155,6 +175,9 @@ new Vue({
 
                 // Inserisci stelle in base al voto
                 this.votoInStelle(array)
+
+                // Inserisci attori
+                this.ottieniAttori(array)
 
             })
             
@@ -247,7 +270,7 @@ new Vue({
                     
                 // caso in cui non è presenti generi id
                 } else{
-                    console.log('media generi non disponibili')
+                    // console.log('media generi non disponibili')
                 }
                 
                 // aggiunge attribute generi dell'elemento
@@ -305,41 +328,44 @@ new Vue({
 
         // inserimento lingua
         lingua: function(code){
-            console.log('codice:'+code);
+
+            // console.log('codice:'+code);
+            
             switch(code){
                 case 'en':
-                    console.log('caso 1')
+                    // console.log('caso 1')
                     return 'Inglese';
                 case 'it':
-                    console.log('caso 2')
+                    // console.log('caso 2')
                     return 'Italiana';
                 case 'de':
-                    console.log('caso 3')
+                    // console.log('caso 3')
                     return 'Tedesca';
                 case 'es':
-                    console.log('caso 4')
+                    // console.log('caso 4')
                     return 'Spagnolo';
                 case 'fr':
-                    console.log('caso 5')
+                    // console.log('caso 5')
                     return 'Francese';
                 case 'ru':
-                    console.log('caso 6')
+                    // console.log('caso 6')
                     return 'Russo';
                 case 'no':
-                    console.log('caso 7')
+                    // console.log('caso 7')
                     return 'Norvegese';
                 case 'ja':
-                    console.log('caso 8')
+                    // console.log('caso 8')
                     return 'Giapponese';
                 default:
-                    console.log('caso default')
+                    // console.log('caso default')
                     return code;
             }
         },
 
         // inserimento lingua
         bandiere: function(code){
-            console.log('codice bandiera:'+code);
+
+            // console.log('codice bandiera:'+code);
             
             let srcParziale = 'Flag/Flag_of_';
             let fileType = '.svg';
