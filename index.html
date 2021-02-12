@@ -94,9 +94,12 @@
                                     <span v-if="movie.generi.length == 0"> Non disponibile</span>
                                 </p>
                                 <p>Voto: 
-                                        <span class="stelle" v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
-                                        --><span class="stelle" v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
-                                        --><span class="stelle" v-for="index in movie.votoStelle.mancanti"> <i class="far fa-star"></i> </span>
+                                        <span v-if="movie.votoStelle.mancanti == 5">Non disponibile</span>
+                                        <span v-if="movie.votoStelle.mancanti != 5"><!--
+                                            --><span class="stelle" v-for="index in movie.votoStelle.voto"> <i class="fas fa-star"></i> </span><!--
+                                            --><span class="stelle" v-if="movie.votoStelle.stellaMeta"> <i class="fas fa-star-half-alt"></i> </span><!--
+                                            --><span class="stelle" v-for="index in movie.votoStelle.mancanti"> <i class="far fa-star"></i> </span>
+                                        </span>  
                                 </p>
                                 <p>Trama: 
                                     <span v-if="movie.overview != '' ">{{movie.overview}}</span>
