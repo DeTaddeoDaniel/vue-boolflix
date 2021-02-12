@@ -107,7 +107,7 @@ new Vue({
         // gestione e modifica dati ricevuti dalle API
         modificheDataRicevuti: function(typeElement){
 
-            // tipo di array da prendere ( move o serie tv)
+            // tipo di array da prendere ( movie o serie tv)
             if( typeElement == 'movie'){
                 array = this.movies;
             } else {
@@ -128,11 +128,14 @@ new Vue({
                     Vue.set(array[index], 'poster_path', 'https://image.tmdb.org/t/p/w500' + element.poster_path)
                 }
 
+                // Inserisci generi dell'elemento
+                this.generiMedia(array)
+
+                // Inserisci stelle in base al voto
+                this.votoInStelle(array)
             })
             
 
-            this.votoInStelle(typeElement)
-            this.generiMedia(typeElement)
             
             this.addMediaArray()
             this.filter()
@@ -147,14 +150,7 @@ new Vue({
         },
 
         // trasforma il voto in base 10 a base 2 con le stelle
-        votoInStelle: function(typeMedia){
-            
-            // tipo di array da prendere
-            if( typeMedia == 'movie'){
-                array = this.movies;
-            } else {
-                array = this.serieTv;
-            }
+        votoInStelle: function(array){
 
             // add to stelle oggetto
              array = array.map( (movie, index) =>{
@@ -194,61 +190,79 @@ new Vue({
         },
 
         // aggiungi campo array i generi da numeri  (movie e serie tv)
-        generiMedia: function(typeMedia){
-
-            console.log(typeMedia)
-            
-            // tipo di array da prendere
-            if( typeMedia == 'movie'){
-                array = this.movies;
-            } else {
-                array = this.serieTv;
-            }
+        generiMedia: function(array){
 
             // Prendi un elemento movie singolarmente
              array = array.map( (movie, index) =>{
+
+                console.log('check media array item '+index)
                 
+                // se sono presenti generi dal API del media
                 if(movie.genre_ids.length != 0){
                     
-                        let test = 0;
-                    // prendi ogni numero presente del array generi
-                    movie.genre_ids.forEach( (genere, index) => {
+                    let generi = []
+
+                    console.log(movie.genre_ids)
+
+                    movie.genre_ids.map( (genere, posizione) => {
                         
-                        // variabili while coppia e variabile uscita
-                        let indexCoppia = 0;
-                        let trovato = false;
-                        
-                        // trova lo stesso id
-                        while(!trovato && indexCoppia < this.genereMediaLista.length){
-                            
-                            // confronta numero id movie e numero id generi
-                            if(parseInt(genere) == this.genereMediaLista[indexCoppia].id){
-                                
-                                // esci dal ciclo perchè è stat trovato
-                                trovato = true;
-                                console.log(test +' - corrispodenza: '+this.genereMediaLista[indexCoppia].name);
-                                test++;
-
-                            // continua al successivo elemento id generi
-                            } else {
-                                indexCoppia++;
-                            }
-
-                        }
-
-                        // controlla se esiste id genere associato
-                        if(indexCoppia != this.genereMediaLista.length){
-                            
-                            // sostutuisci id con nome del genere
-                            movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name;
-
-                        // cancella id non associato
+                        if (this.genereMediaLista.some(e => e.id == genere)) {
+                            console.log('trovata corrispodenza')
+                            pos = this.genereMediaLista.map(function(e) { return e.id; }).indexOf(genere);
+                            console.log('posione indice: '+pos)
+                            console.log('check indice: '+this.genereMediaLista[pos].name)
+                            generi.push(this.genereMediaLista[pos].name)
+                            console.log(generi[posizione])
                         } else {
-                            console.log('Non trovato')
-                            movie.genre_ids.splice(index, 1)
+                            console.log('non trovata corrispodenza')
                         }
-
+                        
                     })
+
+                    Vue.set(movie, 'generi', generi)
+
+                    console.log(generi)
+                    console.log(movie.generi)
+                    
+                    
+                    // prendi ogni numero presente del array generi
+                    // movie.genre_ids.forEach( (genere, index) => {
+                        
+                    //     // variabili while coppia e variabile uscita
+                    //     let indexCoppia = 0;
+                    //     let trovato = false;
+                        
+                    //     // trova lo stesso id
+                    //     while(!trovato && indexCoppia < this.genereMediaLista.length){
+                            
+                    //         // confronta numero id movie e numero id generi
+                    //         if(parseInt(genere) == this.genereMediaLista[indexCoppia].id){
+                                
+                    //             // esci dal ciclo perchè è stat trovato
+                    //             trovato = true;
+                    //             console.log(test +' - corrispodenza: '+this.genereMediaLista[indexCoppia].name);
+                    //             test++;
+
+                    //         // continua al successivo elemento id generi
+                    //         } else {
+                    //             indexCoppia++;
+                    //         }
+
+                    //     }
+
+                    //     // controlla se esiste id genere associato
+                    //     if(indexCoppia != this.genereMediaLista.length){
+                            
+                    //         // sostutuisci id con nome del genere
+                    //         movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name;
+
+                    //     // cancella id non associato
+                    //     } else {
+                    //         console.log('Non trovato')
+                    //         movie.genre_ids.splice(index, 1)
+                    //     }
+
+                    // })
 
                 } else{
                     console.log('media generi non disponibili')
