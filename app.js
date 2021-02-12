@@ -138,6 +138,7 @@ new Vue({
                     })
 
                     .catch(error =>{
+                        console.log(error)
                         Vue.set(media, 'attori', []);
                     })
             })

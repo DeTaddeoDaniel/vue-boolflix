@@ -91,6 +91,12 @@
                                     <span >{{lingua(movie.original_language)}} </span>
                                     <img class="linguaFlag" :src="bandiere(movie.original_language)" :alt="'flag of '+lingua(movie.original_language)">
                                 </p>
+                                <p>Attori: 
+                                    <span v-if="movie.attori.length != 0" v-for="(attore,index) in movie.attori">
+                                        {{attore}}<span v-if="index < movie.attori.length - 1">,</span>
+                                    </span>
+                                    <span v-if="movie.attori.length == 0"> Non disponibile</span>
+                                </p>
                                 <p>Genere: 
                                     <span v-if="movie.generi.length != 0" v-for="(genere,index) in movie.generi">
                                         {{genere}}<span v-if="index < movie.generi.length -1">,</span>
