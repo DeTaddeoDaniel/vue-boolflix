@@ -128,6 +128,10 @@ img{
     max-width: 100%;
 }
 
+.linguaFlag{
+    max-height: 1rem;
+}
+
 .posterNull{
     font-size: 25px;
     text-align: center;

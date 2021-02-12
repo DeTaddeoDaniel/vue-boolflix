@@ -335,6 +335,31 @@ new Vue({
                     console.log('caso default')
                     return code;
             }
+        },
+
+        // inserimento lingua
+        bandiere: function(code){
+            console.log('codice bandiera:'+code);
+            
+            let srcParziale = 'Flag/Flag_of_';
+            let fileType = '.svg';
+
+            switch(code){
+                case 'en':
+                case 'it':
+                case 'de':
+                case 'es':
+                case 'fr':
+                case 'ru':
+                case 'no':
+                case 'ja':
+                    
+                    return srcParziale+code+fileType;
+                
+                default:
+                    console.log('caso default')
+                    return null;
+            }
         }
     },
 
