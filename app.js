@@ -193,77 +193,38 @@ new Vue({
         generiMedia: function(array){
 
             // Prendi un elemento movie singolarmente
-             array = array.map( (movie, index) =>{
-
-                console.log('check media array item '+index)
+             array = array.map( movie =>{
                 
                 // se sono presenti generi dal API del media
                 if(movie.genre_ids.length != 0){
                     
+                    // crea variabile array dei generi
                     let generi = []
 
-                    console.log(movie.genre_ids)
-
+                    // per ogni elemento genere ottieni nome
                     movie.genre_ids.map( (genere, posizione) => {
                         
+                        // controlla se esiste l'id genere
                         if (this.genereMediaLista.some(e => e.id == genere)) {
-                            console.log('trovata corrispodenza')
+                            
+                            // ottieni indice della corrispodenza mappando l'array e torna id genere e 
+                            // se corrisponde torna l'indice in cui si trova nell'array genereMediaLista
                             pos = this.genereMediaLista.map(function(e) { return e.id; }).indexOf(genere);
-                            console.log('posione indice: '+pos)
-                            console.log('check indice: '+this.genereMediaLista[pos].name)
+
+                            // inserisci elemento corrispodente in generi il nome del genere
                             generi.push(this.genereMediaLista[pos].name)
-                            console.log(generi[posizione])
+
+                        // caso in cui non esiste id genere
                         } else {
                             console.log('non trovata corrispodenza')
                         }
                         
                     })
 
+                    // aggiunge attribute generi dell'elemento
                     Vue.set(movie, 'generi', generi)
-
-                    console.log(generi)
-                    console.log(movie.generi)
                     
-                    
-                    // prendi ogni numero presente del array generi
-                    // movie.genre_ids.forEach( (genere, index) => {
-                        
-                    //     // variabili while coppia e variabile uscita
-                    //     let indexCoppia = 0;
-                    //     let trovato = false;
-                        
-                    //     // trova lo stesso id
-                    //     while(!trovato && indexCoppia < this.genereMediaLista.length){
-                            
-                    //         // confronta numero id movie e numero id generi
-                    //         if(parseInt(genere) == this.genereMediaLista[indexCoppia].id){
-                                
-                    //             // esci dal ciclo perchè è stat trovato
-                    //             trovato = true;
-                    //             console.log(test +' - corrispodenza: '+this.genereMediaLista[indexCoppia].name);
-                    //             test++;
-
-                    //         // continua al successivo elemento id generi
-                    //         } else {
-                    //             indexCoppia++;
-                    //         }
-
-                    //     }
-
-                    //     // controlla se esiste id genere associato
-                    //     if(indexCoppia != this.genereMediaLista.length){
-                            
-                    //         // sostutuisci id con nome del genere
-                    //         movie.genre_ids[index] = this.genereMediaLista[indexCoppia].name;
-
-                    //     // cancella id non associato
-                    //     } else {
-                    //         console.log('Non trovato')
-                    //         movie.genre_ids.splice(index, 1)
-                    //     }
-
-                    // })
-
+                // caso in cui non è presenti generi id
                 } else{
                     console.log('media generi non disponibili')
                 }
