@@ -303,6 +303,7 @@ new Vue({
             }
         },
 
+        // inserimento lingua
         lingua: function(code){
             console.log('codice:'+code);
             switch(code){
@@ -336,8 +337,5 @@ new Vue({
             }
         }
     },
-
-    computed:{
-    }
 
 })
