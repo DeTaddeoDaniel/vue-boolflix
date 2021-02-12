@@ -80,6 +80,7 @@
                             <div class="card-main">
                                 <p>Titolo: <span>{{movie.title}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_title}}</span></p>
+                                <p>Lingua originale: <span>{{lingua(movie.original_language)}}</span></p>
                                 <p>Genere: 
                                     <span v-if="movie.generi.length != 0" v-for="(genere,index) in movie.genre_ids.length">
                                         {{movie.generi[index]}}<!--
@@ -117,7 +118,7 @@
                             <div class="card-main">
                                 <p>Titolo: <span>{{movie.name}}</span></p>
                                 <p>Titolo originale: <span>{{movie.original_name}}</span></p>
-                                <p>Lingua originale: <span>{{movie.original_language}}</span></p>
+                                <p>Lingua originale: <span>{{lingua(movie.original_language)}}</span></p>
                                 <p>Genere: 
                                     <span v-if="movie.generi.length != 0" v-for="(genere,index) in movie.genre_ids.length">
                                         {{movie.generi[index]}}<!--

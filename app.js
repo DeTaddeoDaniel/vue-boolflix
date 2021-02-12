@@ -28,7 +28,6 @@ new Vue({
 
     beforeMount() {
         this.ottieniGeneriMedia();
-        this.ottieniAttori()
     },
 
     methods: {
@@ -122,7 +121,7 @@ new Vue({
                 })
 
                 .catch(error =>{
-                    this.erroreAPI(error, 'genres media')
+                    this.erroreAPI(error, 'attori error')
                 })
         },
 
@@ -156,6 +155,7 @@ new Vue({
 
                 // Inserisci stelle in base al voto
                 this.votoInStelle(array)
+
             })
             
             // unisci i due array film e serie tv
@@ -303,6 +303,41 @@ new Vue({
             }
         },
 
+        lingua: function(code){
+            console.log('codice:'+code);
+            switch(code){
+                case 'en':
+                    console.log('caso 1')
+                    return 'Inglese';
+                case 'it':
+                    console.log('caso 2')
+                    return 'Italiana';
+                case 'de':
+                    console.log('caso 3')
+                    return 'Tedesca';
+                case 'es':
+                    console.log('caso 4')
+                    return 'Spagnolo';
+                case 'fr':
+                    console.log('caso 5')
+                    return 'Francese';
+                case 'ru':
+                    console.log('caso 6')
+                    return 'Russo';
+                case 'no':
+                    console.log('caso 7')
+                    return 'Norvegese';
+                case 'ja':
+                    console.log('caso 8')
+                    return 'Giapponese';
+                default:
+                    console.log('caso default')
+                    return code;
+            }
+        }
     },
+
+    computed:{
+    }
 
 })
