@@ -28,6 +28,7 @@ new Vue({
 
     beforeMount() {
         this.ottieniGeneriMedia();
+        this.ottieniAttori()
     },
 
     methods: {
@@ -104,6 +105,27 @@ new Vue({
                 })
         },
 
+        // ottieni data generi dei media dellle api
+        ottieniAttori: function(idMedia = 42434){
+
+            axios
+                .get('https://api.themoviedb.org/3/movie/'+idMedia+'/credits', {params:{
+                    api_key: '7d986f5d7f72343a109e093583f2df92',
+                    language: 'it'
+                }})
+                
+                .then(dataAPI =>{
+                    let attoriLista = dataAPI.data.cast;
+                    console.log('attori lista');
+                    console.log(attoriLista);
+                    
+                })
+
+                .catch(error =>{
+                    this.erroreAPI(error, 'genres media')
+                })
+        },
+
         // gestione e modifica dati ricevuti dalle API
         modificheDataRicevuti: function(typeElement){
 
@@ -125,6 +147,7 @@ new Vue({
 
                 // inserisci poster dell'elemento
                 if(array[index].poster_path != null){
+                    // aggiungi parte mancante del link del poster
                     Vue.set(array[index], 'poster_path', 'https://image.tmdb.org/t/p/w500' + element.poster_path)
                 }
 
@@ -141,7 +164,6 @@ new Vue({
             // filtra elementi di ricerca
             this.filter()
         },
-
 
         // gestione errori API
         erroreAPI: function(error, info){
@@ -242,6 +264,7 @@ new Vue({
         // filtra elementi per genere
         filter: function(){
             
+            // filtra per genere dell'elemento
             if( this.selectText != 'All'){
 
                 this.media.forEach( (media,index) => {
@@ -262,6 +285,7 @@ new Vue({
                 })
             }
 
+            // filtra per tipo dell'elemento
             if( this.selectType != 'All'){
 
                 this.media.forEach( (media,index) => {
