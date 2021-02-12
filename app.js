@@ -135,9 +135,10 @@ new Vue({
                 this.votoInStelle(array)
             })
             
-
-            
+            // unisci i due array film e serie tv
             this.addMediaArray()
+
+            // filtra elementi di ricerca
             this.filter()
         },
 
@@ -195,11 +196,11 @@ new Vue({
             // Prendi un elemento movie singolarmente
              array = array.map( movie =>{
                 
+                // crea variabile array dei generi
+                let generi = []
+
                 // se sono presenti generi dal API del media
-                if(movie.genre_ids.length != 0){
-                    
-                    // crea variabile array dei generi
-                    let generi = []
+                if(movie.genre_ids.length != 0){           
 
                     // per ogni elemento genere ottieni nome
                     movie.genre_ids.map( (genere, posizione) => {
@@ -216,18 +217,19 @@ new Vue({
 
                         // caso in cui non esiste id genere
                         } else {
-                            console.log('non trovata corrispodenza')
+                            console.log('non trovata corrispodenza: '+ genere + ' in posizione ' + posizione)
                         }
                         
                     })
 
-                    // aggiunge attribute generi dell'elemento
-                    Vue.set(movie, 'generi', generi)
                     
                 // caso in cui non è presenti generi id
                 } else{
                     console.log('media generi non disponibili')
                 }
+                
+                // aggiunge attribute generi dell'elemento
+                Vue.set(movie, 'generi', generi)
 
             })
         },
@@ -245,9 +247,9 @@ new Vue({
                 this.media.forEach( (media,index) => {
 
                     // console.log(this.selectText)
-                    // console.log(media.genre_ids)
+                    console.log(media)
                     
-                    if(media.genre_ids.includes(this.selectText)){
+                    if(media.generi.includes(this.selectText)){
                         media.visibility = true;
                     } else {
                         media.visibility = false;
