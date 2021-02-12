@@ -42,15 +42,15 @@
             
             <div class="main">
 
-                <div class="header-main">
-                    <div>
+                <div class="header-main d-flex-between">
+                    <div class="d-flex">
                         <p> Filtra per genere la ricerca</p>
                         <select @change="filter" v-model="selectText">
                             <option value="All">All</option>
                             <option v-for="genere in genereMediaLista" :value="genere.name">{{genere.name}}</option>
                         </select>
                     </div>
-                    <div>
+                    <div class="d-flex">
                         <p> Filtra per tipo</p>
                         <select @change="filter" v-model="selectType">
                             <option value="All">All</option>
