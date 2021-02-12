@@ -113,6 +113,8 @@ new Vue({
 
                 let idMedia = media.id;
 
+                media.attori = [];
+
                 axios
                     .get('https://api.themoviedb.org/3/movie/'+idMedia+'/credits', {params:{
                         api_key: '7d986f5d7f72343a109e093583f2df92',
@@ -127,19 +129,18 @@ new Vue({
 
                         let attori = [];
 
-                        attoriLista.forEach(attore =>{
+                        attoriLista.forEach((attore, index) =>{
 
-                            if(attore.known_for_department == "Acting"){
+                            if(attore.known_for_department == "Acting" && index < 5){
                                 attori.push(attore.name);
                             }                    
                         });
 
-                        Vue.set(media, 'attori', attori);
+                        media.attori = attori;
                     })
 
                     .catch(error =>{
                         console.log(error)
-                        Vue.set(media, 'attori', []);
                     })
             })
 
@@ -159,16 +160,13 @@ new Vue({
             // mappa tutto il media e indice di posizione
             array.map( (element, index) => {
 
-                // inserisci type dell'elemento
-                Vue.set(array[index], 'type', typeElement);
-
-                // inserisci visibility dell'elemento
-                Vue.set(array[index], 'visibility', true);
-
+                element.type = typeElement;
+                element.visibility = true; 
+                
                 // inserisci poster dell'elemento
-                if(array[index].poster_path != null){
+                if(element.poster_path != null){
                     // aggiungi parte mancante del link del poster
-                    Vue.set(array[index], 'poster_path', 'https://image.tmdb.org/t/p/w500' + element.poster_path)
+                    element.poster_path = 'https://image.tmdb.org/t/p/w500' + element.poster_path
                 }
 
                 // Inserisci generi dell'elemento
@@ -268,14 +266,13 @@ new Vue({
                         
                     })
 
-                    
                 // caso in cui non è presenti generi id
                 } else{
                     // console.log('media generi non disponibili')
                 }
                 
                 // aggiunge attribute generi dell'elemento
-                Vue.set(movie, 'generi', generi)
+                movie.generi = generi;
 
             })
         },
